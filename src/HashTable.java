@@ -1,3 +1,6 @@
+/**
+ * @author Yuxiang Chem, YangTian
+ */
 import java.util.ArrayList;
 
 public class HashTable {
