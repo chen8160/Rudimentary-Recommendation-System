@@ -7,6 +7,14 @@ public class HashFunction {
 
     public HashFunction(int range){
         //TODO: Constructor;
+
+        //Find prime
+        while(!isPrime(range)){
+            range++;
+        }
+        p = range;
+
+        //TODO: Set a and b
     }
 
     public int hash(int x){
