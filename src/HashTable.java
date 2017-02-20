@@ -1,14 +1,21 @@
-/**
- * @author Yuxiang Chem, YangTian
+/*
+  @author Yuxiang Chem, YangTian
  */
 import java.util.ArrayList;
 
 public class HashTable {
 
-    ArrayList<Tuple> hashTable;
+    private ArrayList<Tuple>[] tupleLists;
 
     public HashTable(int size){
         //TODO: Constructor
+        while(!isPrime(size)){
+            size++;
+        }
+        tupleLists = new ArrayList[size];
+        for (int i = 0; i < size; i++){
+            tupleLists[i] = new ArrayList<Tuple>();
+        }
     }
 
     public int maxLoad(){
@@ -47,6 +54,23 @@ public class HashTable {
 
     public void remove(Tuple t){
         //TODO: remove tuple t from the hash table
+    }
+
+    private boolean isPrime(int n){
+
+        if (n % 2 == 0 || n % 3 == 0){
+            return false;
+        }
+
+        int root = (int) Math.sqrt(n);
+
+        for (int i = 5; i<= root; i += 6){
+            if (n % i == 0 || n % (i + 2) == 0){
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }
