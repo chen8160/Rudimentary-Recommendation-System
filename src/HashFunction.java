@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * @author Yuxiang Chem, YangTian
  */
@@ -6,12 +8,16 @@ public class HashFunction {
     private int a, b, p;
 
     public HashFunction(int range){
-        //TODO: Constructor;
+
+        setP(range);
+        Random r = new Random();
+        a = r.nextInt(range);
+        b = r.nextInt(range);
+
     }
 
     public int hash(int x){
-        //TODO: Return the hash value of x
-        return 0;
+        return (a * x + b) % p;
     }
 
     public int getA(){
@@ -27,15 +33,35 @@ public class HashFunction {
     }
 
     public void setA(int x){
-        //TODO: update a
+        a = x % p;
     }
 
     public void setB(int y){
-        //TODO: update b
+        b = y % p;
     }
 
     public void setP(int x){
-        //TODO: update p
+        while(!isPrime(x)){
+            x++;
+        }
+        p = x;
+    }
+
+    private boolean isPrime(int n){
+
+        if (n % 2 == 0 || n % 3 == 0){
+            return false;
+        }
+
+        int root = (int) Math.sqrt(n);
+
+        for (int i = 5; i<= root; i += 6){
+            if (n % i == 0 || n % (i + 2) == 0){
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
