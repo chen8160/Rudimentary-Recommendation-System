@@ -1,7 +1,5 @@
-
 /**
- * @author Yuxiang Chen
- *
+ * @author Yuxiang Chem, YangTian
  */
 public class Tuple {
 
