@@ -6,41 +6,45 @@ import java.util.ArrayList;
 public class HashTable {
 
     private ArrayList<Tuple>[] tupleLists;
+    private int numElements;
 
-    public HashTable(int size){
-        //TODO: Constructor
-        while(!isPrime(size)){
-            size++;
+    public HashTable(int numElements){
+        while(!isPrime(numElements)){
+            numElements++;
         }
-        tupleLists = new ArrayList[size];
-        for (int i = 0; i < size; i++){
+        tupleLists = new ArrayList[numElements];
+        for (int i = 0; i < numElements; i++){
             tupleLists[i] = new ArrayList<Tuple>();
         }
     }
 
     public int maxLoad(){
-        //TODO: return the max load of the hash table
-        return 0;
+        int ret = 0;
+        for (int i = 0; i < tupleLists.length; i++){
+            ret = Math.max(ret, tupleLists[i].size());
+        }
+        return ret;
     }
 
     public int averageLoad(){
-        //TODO: return the avg load of the hash table
-        return 0;
+        int base = 0;
+        for (int i = 0; i < tupleLists.length; i++){
+            if (tupleLists[i].size() != 0)
+                base++;
+        }
+        return numElements / base;         //What Happens when base is 0???
     }
 
     public int size(){
-        //TODO: return the current size of the hash table
-        return 0;
+        return tupleLists.length;
     }
 
     public int numElements(){
-        //TODO: return the number of elements stored in the hash table
-        return 0;
+        return numElements;
     }
 
     public int loadFactor(){
-        //TODO: return the load factor
-        return 0;
+        return numElements / tupleLists.length;
     }
 
     public void add(Tuple t){
