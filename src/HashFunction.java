@@ -64,24 +64,4 @@ public class HashFunction {
         return true;
     }
 
-
-    //Test if n is prime
-    private boolean isPrime(int n){
-
-        if (n == 1 || n == 2 || n == 3){
-            return true;
-        }
-
-        int root = (int) Math.sqrt(n);
-
-        for (int i = 2; i<= root; i++){
-            if (n % i == 0){
-                return false;
-            }
-        }
-
-        return true;
-
-    }
-
 }
