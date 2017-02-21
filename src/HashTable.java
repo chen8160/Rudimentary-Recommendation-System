@@ -46,7 +46,7 @@ public class HashTable {
     }
 
     public double loadFactor(){
-        return (double) numElements / tupleLists.length;
+        return ((double) numElements) / tupleLists.length;
     }
 
     public void add(Tuple t){
