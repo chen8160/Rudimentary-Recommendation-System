@@ -1,4 +1,4 @@
-/*
+/**
   @author Yuxiang Chem, YangTian
  */
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ public class HashTable {
 
     private ArrayList<Tuple>[] tupleLists;
     private int numElements;
+    private HashFunction h;
 
     public HashTable(int numElements){
         while(!isPrime(numElements)){
@@ -16,6 +17,7 @@ public class HashTable {
         for (int i = 0; i < numElements; i++){
             tupleLists[i] = new ArrayList<Tuple>();
         }
+        h = new HashFunction(numElements);
     }
 
     public int maxLoad(){
@@ -43,21 +45,49 @@ public class HashTable {
         return numElements;
     }
 
-    public int loadFactor(){
-        return numElements / tupleLists.length;
+    public double loadFactor(){
+        return (double) numElements / tupleLists.length;
     }
 
     public void add(Tuple t){
-        //TODO: add the tuple t to the hash table. Resize if necessary
+        if (loadFactor() > 0.7){
+            int newSize = size() * 2;
+            while(!isPrime(newSize)){
+                newSize++;
+            }
+
+            ArrayList<Tuple>[] newTupleLists = new ArrayList[newSize];
+            h = new HashFunction(newSize);
+
+            for (int i = 0; i < tupleLists.length; i++){
+                for (int j = 0; j < tupleLists[i].size(); j++){
+                    newTupleLists[h.hash(tupleLists[i].get(j).getKey())].add(tupleLists[i].get(j));
+                }
+            }
+
+            tupleLists = newTupleLists;
+        }
+
+        tupleLists[h.hash(t.getKey())].add(t);
     }
 
     public ArrayList<Tuple> search(int k){
-        //TODO: return an arraylist of tuples, which key==k
-        return null;
+
+        ArrayList<Tuple> ret = new ArrayList<>();
+        ArrayList<Tuple> keyList = tupleLists[h.hash(k)];
+
+        for (Tuple t : keyList){
+            if (t.getKey() == k){
+                ret.add(t);
+            }
+        }
+
+        return ret;
     }
 
     public void remove(Tuple t){
-        //TODO: remove tuple t from the hash table
+        ArrayList<Tuple> list = tupleLists[h.hash(t.getKey())];
+        list.remove(t);
     }
 
     private boolean isPrime(int n){
