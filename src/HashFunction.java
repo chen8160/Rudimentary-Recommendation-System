@@ -11,13 +11,19 @@ public class HashFunction {
 
         setP(range);
         Random r = new Random();
-        a = r.nextInt(range);
-        b = r.nextInt(range);
+        a = r.nextInt(p);
+        b = r.nextInt(p);
 
     }
 
     public int hash(int x){
-        return (a * x + b) % p;
+        int hash = (a * x + b) % p;
+
+        if (hash < 0){
+            hash *= -1;
+        }
+
+        return hash;
     }
 
     public int getA(){
@@ -45,6 +51,10 @@ public class HashFunction {
             x++;
         }
         p = x;
+
+        Random r = new Random();
+        a = r.nextInt(p);
+        b = r.nextInt(p);
     }
 
     private boolean isPrime(int n){

@@ -69,6 +69,7 @@ public class HashTable {
         }
 
         tupleLists[h.hash(t.getKey())].add(t);
+        numElements++;
     }
 
     public ArrayList<Tuple> search(int k){
