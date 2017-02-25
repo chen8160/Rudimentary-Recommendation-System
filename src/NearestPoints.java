@@ -77,9 +77,12 @@ public class NearestPoints {
     public void allNearestPointsNaive() throws FileNotFoundException {
         StringBuilder sb = new StringBuilder();
         for (float point : pointSet) {
-            sb.append(point + ": ");
+            sb.append(point + " ");
             ArrayList<Float> closePoints = naiveNearestPoints(point);
-            sb.append(closePoints + "\n");
+            for (float num : closePoints) {
+                sb.append(num + " ");
+            }
+            sb.append("\n");
         }
 
         PrintWriter printWriter = new PrintWriter("NaiveSolution.txt");
@@ -90,10 +93,13 @@ public class NearestPoints {
     public void allNearestPointsHash() throws FileNotFoundException {
 
         StringBuilder sb = new StringBuilder();
-        for (float point : pointSet){
-            sb.append(point + ": ");
+        for (float point : pointSet) {
+            sb.append(point + " ");
             ArrayList<Float> closePoints = npHashNearestPoints(point);
-            sb.append(closePoints + "\n");
+            for (float num : closePoints) {
+                sb.append(num + " ");
+            }
+            sb.append("\n");
         }
 
         PrintWriter printWriter = new PrintWriter("HashSolution.txt");
